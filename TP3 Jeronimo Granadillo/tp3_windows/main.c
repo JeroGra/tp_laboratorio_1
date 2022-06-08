@@ -116,10 +116,6 @@ int main()
 						{
 			    		   printf("\n|-->Pasajero Caragado.\n");
 						}
-						else
-						{
-							printf("\n|-->Operacion cancelada.\n");
-						}
 			         }
 			    	else
 			    	{

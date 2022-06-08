@@ -90,6 +90,7 @@ int controller_addPassenger(LinkedList* pArrayListPassenger,pEstado* estado,int 
 		getString(apellido,"Coloque el apellido\n",30);
 		TrasnsformarNombres(apellido);
 		getString(codigo,"Coloque el codigo de vuelo\n",10);
+		Set_CodigosMayus(codigo);
 		DefinirTipo(tipoPasajero,tipo,sizeT);
 		precio = getFloat("Coloque el precio\n",100,100000);
 	    DefinirEstado(estadoPasajero,estado,sizeE);
@@ -114,7 +115,7 @@ int controller_editPassenger(LinkedList* pArrayListPassenger,pEstado* estado,int
 	char apellido[30];
 	float precio;
 	char tipoPasajero[50];
-	char estadoPasajero[50];
+	char codigo[10];
 	int BanderaCambios = 0;
 	Passenger* pasajero = NULL;
 	if(pArrayListPassenger != NULL)
@@ -136,7 +137,7 @@ int controller_editPassenger(LinkedList* pArrayListPassenger,pEstado* estado,int
 					             "|1.Nombre                     |\n"
 					             "|2.Apellido                   |\n"
 					             "|3.Tipo de pasajero           |\n"
-					             "|4.Estado de pasajero         |\n"
+					             "|4.Codigo de pasajero         |\n"
 					             "|5.Precio                     |\n"
 					             "|6.Salir                      |\n"
 					             "|--->Seleccione una opcion<---|\n",1,6);
@@ -163,8 +164,9 @@ int controller_editPassenger(LinkedList* pArrayListPassenger,pEstado* estado,int
 				   BanderaCambios = 1;
 			   break;
 			   case 4:
-				   DefinirEstado(estadoPasajero,estado,sizeE);
-				   Passenger_setEstado(pasajero,estadoPasajero);
+				   getString(codigo,"Coloque el codigo de vuelo\n",10);
+				   Set_CodigosMayus(codigo);
+				   Passenger_setCodigoVuelo(pasajero,codigo);
 				   printf("Se realizo el cambio\n");
 				   BanderaCambios = 1;
 			   break;
@@ -187,7 +189,7 @@ int controller_editPassenger(LinkedList* pArrayListPassenger,pEstado* estado,int
 							     "1.Si\n"
 							     "2.No\n",1,2)==2)
 					   {
-						   if(getInt("Deseas modificarlos devuelta?\n"
+						   if(getInt("Deseas modificar devuelta?\n"
 									 "1.Si\n"
 									 "2.No\n",1,2)==1)
 						   {

@@ -58,4 +58,13 @@ void TrasnsformarNombres(char modificar[]);
 /// @param mes se le pasa el mes (anteriormete pedido y validado)
 /// @return devuelve el dia validado segun el mes
 int ValidarDiaFecha(int mes);
+
+/// @brief analiza todos los caracteres de un array y pasa a mayuscula todos los caracteres correspondientes al abecedario en minuscula
+/// @param codigo array de caracteres
+void Set_CodigosMayus(char* codigo);
+
+/// @brief Valida si un string donde se espera albergar una array de numeros, alberga numeros del 0 al 9
+/// @param num array a validar
+/// @return isOk si retorna -1 es que hay un caracter que no es un numero si devuleve 0 es que son todos numeros
+int EsNumerica(char* num);
 #endif /* FUNCIONESINPUTVALIDACIONES_H_ */

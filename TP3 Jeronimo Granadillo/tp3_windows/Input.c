@@ -13,7 +13,7 @@ int getIntMasIntentos(char mensaje[], int minimo, int maximo, int intentos,int d
 	fflush(stdin);
 	gets(mensajeRecibido);
 	maximoString = MaximoStringInt(maximo);
-	while(ValidacionString(mensajeRecibido,maximoString)==0)
+	while(ValidacionString(mensajeRecibido,maximoString)==0  && EsNumerica(mensajeRecibido)==-1)
 	{
 		intentos--;
 		if(intentos < 1)
@@ -41,7 +41,7 @@ int getIntMasIntentos(char mensaje[], int minimo, int maximo, int intentos,int d
 		fflush(stdin);
 		gets(mensajeRecibido);
 
-		while(ValidacionString(mensajeRecibido,maximoString)==0)
+		while(ValidacionString(mensajeRecibido,maximoString)==0  && EsNumerica(mensajeRecibido)==-1)
 		{
 			intentos --;
 			if(intentos < 1)
@@ -72,7 +72,7 @@ int getInt(char mensaje[], int minimo, int maximo)
 	fflush(stdin);
 	gets(mensajeRecibido);
 	maximoString = MaximoStringInt(maximo);
-	while(ValidacionString(mensajeRecibido,maximoString)==0)
+	while(ValidacionString(mensajeRecibido,maximoString)==0  && EsNumerica(mensajeRecibido)==-1)
 	{
 		printf("Error: \n");
 		fflush(stdin);
@@ -85,7 +85,7 @@ int getInt(char mensaje[], int minimo, int maximo)
 		fflush(stdin);
 		gets(mensajeRecibido);
 
-		while(ValidacionString(mensajeRecibido,maximoString)==0)
+		while(ValidacionString(mensajeRecibido,maximoString)==0 && EsNumerica(mensajeRecibido)==-1)
 		{
 			printf("Error: \n");
 			fflush(stdin);
@@ -108,7 +108,7 @@ float getFloat(char mensaje[], int minimo, int maximo)
 	fflush(stdin);
 	gets(mensajeRecibido);
 	maximoString = MaximoStringInt(maximo);
-	while(ValidacionString(mensajeRecibido,maximoString)==0)
+	while(ValidacionString(mensajeRecibido,maximoString)==0 && EsNumerica(mensajeRecibido)==-1)
 	{
 		printf("Error: \n");
 		fflush(stdin);
@@ -122,7 +122,7 @@ float getFloat(char mensaje[], int minimo, int maximo)
 		fflush(stdin);
 		gets(mensajeRecibido);
 
-		while(ValidacionString(mensajeRecibido,maximoString)==0)
+		while(ValidacionString(mensajeRecibido,maximoString)==0 && EsNumerica(mensajeRecibido)==-1)
 		{
 			printf("Error: \n");
 			fflush(stdin);
@@ -257,4 +257,41 @@ int ValidarDiaFecha(int mes)
 	   break;
 	}
 	return dia;
+}
+
+void Set_CodigosMayus(char* codigo)
+{
+	int size;
+	size = strlen(codigo);
+	for(int i = 0;i<size;i++)
+	{
+		if(*(codigo+i) > 96 && *(codigo+i) < 123)
+		{
+			*(codigo+i) = toupper(*(codigo+i));
+		}
+	}
+}
+
+int EsNumerica(char* num)
+{
+	int isOk = -1;
+	int size;
+	size = strlen(num);
+	for(int i = 0;i<size;i++)
+	{
+		if(*(num+i) > 47 && *(num+i) < 58)
+		{
+		  isOk = 0;
+		}
+		else
+		{
+			isOk = -1;
+		}
+		isOk = isOk + 0;
+	}
+	if(isOk != 0)
+	{
+		isOk = -1;
+	}
+	return isOk;
 }
