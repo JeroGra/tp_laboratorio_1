@@ -47,6 +47,12 @@ float getFloat(char mensaje[], int minimo, int maximo);
 /// @param maximo maximo de longitud que puede poseer la cadena
 void getString(char mensajeCargado[], char mensaje[], int maximo);
 
+/// @brief Obtiene un nombre y valida que solo entren caracteres de (a - z) o (A- Z)
+/// @param mensajeCargado variable de tipo array que se pasa por parametro donde se guardara la cadena de caracteres
+/// @param mensaje mensaje de donde se extrae dicha cadena
+/// @param maximo maximo de longitud que puede poseer la cadena
+void getName(char* mensajeCargado, char* mensaje, int maximo);
+
 /// @brief recibe un array donde en teoria alberga un nombre o apellido, convierte  todas las letas de ese array en letras minusculas
 /// convierte la letra del indice 0 del array en una letra mayuscula
 /// verifica si ubo saltos de linea para apenas encontrar uno pasar a letra mayuscula la proxima letra, esto sirve si se ingresan un doble nombre ej 'PEPE FERNANDO'
@@ -67,4 +73,10 @@ void Set_CodigosMayus(char* codigo);
 /// @param num array a validar
 /// @return isOk si retorna -1 es que hay un caracter que no es un numero si devuleve 0 es que son todos numeros
 int EsNumerica(char* num);
+
+/// @brief  valida los nombres, reccorre el array donde alberga un "nombre o apellido" y valida que todos los caracteres pertenezcan al abecedario
+/// tanto en minuscula como en mayuscula, tambien valida que la posicion 0 del array no sea un espacio
+/// @param nombre array a validar
+/// @return isOk si retorna -1 es que hay un caracter que no cumplen con la condicion si devuleve 0 es que si cumplen la condicion
+int esUnNombre(char* nombre);
 #endif /* FUNCIONESINPUTVALIDACIONES_H_ */

@@ -55,21 +55,18 @@ int GenerarId(LinkedList* pArrayListPassenger)
 {
 	int nuevoId;
 	FILE* pArchivo;
-	int contador = 0;
 	char id[2000];
 	pArchivo = fopen("idRegister.csv","r");
 	if(pArchivo != NULL)
 	{
-		fscanf(pArchivo,"%[^\n]\n",id);
 		while(!feof(pArchivo))
 		{
 			fscanf(pArchivo,"%[^\n]\n",id);
-		    contador++;
+			nuevoId = atoi(id);
 		}
 	}
+	nuevoId++;
 	fclose(pArchivo);
-
-	nuevoId = contador+1;
 	return nuevoId;
 }
 void DefinirEstado(char* estadoPasajero,pEstado* estado,int sizeE)
@@ -238,10 +235,8 @@ int AddPassenger(int id, char*nombre, char*apellido, char*tipoPasajero, char*cod
 			pArchivo = fopen("idRegister.csv","w");
 			if(pArchivo != NULL)
 			{
-				for(int i = 0;i<id+1;i++)
-				{
-					fprintf(pArchivo,"%d\n",i);
-				}
+
+					fprintf(pArchivo,"%d\n",id);
 			}
 			fclose(pArchivo);
 		}
@@ -249,7 +244,6 @@ int AddPassenger(int id, char*nombre, char*apellido, char*tipoPasajero, char*cod
 		{
 			Passenger_delete(pasajero);
 		}
-
 	}
 	return isOk;
 }
@@ -355,39 +349,7 @@ int GetterPassenger(Passenger* pasajero, int*id, char*nombre, char*apellido, cha
 
 }
 
-int BuscarIdPasajero(LinkedList* pArrayListPassenger,Passenger* pasajeroAux)
-{
-	int index = -1;
-	int IdAux;
-	int len;
-	len = ll_len(pArrayListPassenger);
-	printf("\nPASAJEROS\n");
-	controller_ListPassenger(pArrayListPassenger);
-	IdAux = getInt("Seleccione el id del pasajero: \n",1,100000);
-	for(int i = 0;i<len;i++)
-	{
-		pasajeroAux = ll_get(pArrayListPassenger,i);
-		if(IdAux == pasajeroAux->id )
-		{
-			index = i;
-			break;
-		}
-	}
-	while(index == -1)
-	{
-		IdAux = getInt("Seleccione el id del pasajero: \n",1,100000);
-		for(int i = 0;i<len;i++)
-		{
-			pasajeroAux = ll_get(pArrayListPassenger,i);
-			if(IdAux == pasajeroAux->id)
-			{
-				index = i;
-				break;
-			}
-		}
-	}
-	return index;
-}
+
 
 //////////////// Print /////////////////////////////////////
 void Passenger_print(Passenger* pasajero)

@@ -85,9 +85,9 @@ int controller_addPassenger(LinkedList* pArrayListPassenger,pEstado* estado,int 
 	if(pArrayListPassenger != NULL)
 	{
 		id = GenerarId(pArrayListPassenger);
-		getString(nombre,"Coloque el nombre\n",30);
+		getName(nombre,"Coloque el nombre\n",30);
 		TrasnsformarNombres(nombre);
-		getString(apellido,"Coloque el apellido\n",30);
+		getName(apellido,"Coloque el apellido\n",30);
 		TrasnsformarNombres(apellido);
 		getString(codigo,"Coloque el codigo de vuelo\n",10);
 		Set_CodigosMayus(codigo);
@@ -144,36 +144,31 @@ int controller_editPassenger(LinkedList* pArrayListPassenger,pEstado* estado,int
 			   switch(opcion)
 			   {
 			   case 1:
-					getString(nombre,"Coloque el nombre\n",30);
+				    getName(nombre,"Coloque el nombre\n",30);
 					TrasnsformarNombres(nombre);
 					Passenger_setNombre(pasajero,nombre);
-					printf("Se realizo el cambio\n");
 					BanderaCambios = 1;
 			   break;
 			   case 2:
-				   getString(apellido,"Coloque el apellido\n",30);
+				   getName(apellido,"Coloque el apellido\n",30);
 				   TrasnsformarNombres(apellido);
 				   Passenger_setApellido(pasajero,apellido);
-				   printf("Se realizo el cambio\n");
 				   BanderaCambios = 1;
 			   break;
 			   case 3:
 				   DefinirTipo(tipoPasajero,tipo,sizeT);
 				   Passenger_setTipoPasajero(pasajero,tipoPasajero);
-				   printf("Se realizo el cambio\n");
 				   BanderaCambios = 1;
 			   break;
 			   case 4:
 				   getString(codigo,"Coloque el codigo de vuelo\n",10);
 				   Set_CodigosMayus(codigo);
 				   Passenger_setCodigoVuelo(pasajero,codigo);
-				   printf("Se realizo el cambio\n");
 				   BanderaCambios = 1;
 			   break;
 			   case 5:
 				   precio = getFloat("Coloque el precio\n",100,100000);
 				   pasajero->precio = precio;
-				   printf("Se realizo el cambio\n");
 				   BanderaCambios = 1;
 			   break;
 			   case 6:
@@ -198,6 +193,10 @@ int controller_editPassenger(LinkedList* pArrayListPassenger,pEstado* estado,int
 					   }
 				   }
 			   break;
+			   }
+			   if(BanderaCambios == 1 && opcion != 6 && opcion != 0)
+			   {
+				   printf("Se realizo el cambio\n");
 			   }
 		   }while(opcion != 6);
 	   }
@@ -293,48 +292,41 @@ int controller_sortPassenger(LinkedList* pArrayListPassenger)
 					          "|6.Ordenar por Precio                     |\n"
 					          "|7.Salir.                                 |\n"
 					          "|--------->Seleccione una opcion<---------|\n",1,7);
+
+			if(option != 7)
+			{
+				printf("Cargando...\tEsto puede demorarce unos segundos...\n");
+			}
 			switch(option)
 			{
 			case 1:
-				printf("Cargando...\tEsto puede demorarce unos segundos...\n");
 				OrdenarPorId(Aux,1);
 				printf("\n\n\nLISTA SEGUN ORDEN ELEGIDO\n");
-				controller_ListPassenger(Aux);
 				SeOrdeno = 1;
 			break;
 			case 2:
-				printf("Cargando...\tEsto puede demorarce unos segundos...\n");
 				OrdenarPorId(Aux,0);
 				printf("\n\n\nLISTA SEGUN ORDEN ELEGIDO\n");
-				controller_ListPassenger(Aux);
 				SeOrdeno = 1;
 			break;
 			case 3:
-				printf("Cargando...\tEsto puede demorarce unos segundos...\n");
 				OrdenarPorParametros(Aux,0,1);
 				printf("\n\n\nLISTA SEGUN ORDEN ELEGIDO\n");
-				controller_ListPassenger(Aux);
 				SeOrdeno = 1;
 			break;
 			case 4:
-				printf("Cargando...\tEsto puede demorarce unos segundos...\n");
 				OrdenarPorParametros(Aux,1,2);
 				printf("\n\n\nLISTA SEGUN ORDEN ELEGIDO\n");
-				controller_ListPassenger(Aux);
 				SeOrdeno = 1;
 			break;
 			case 5:
-				printf("Cargando...\tEsto puede demorarce unos segundos...\n");
 				OrdenarPorParametros(Aux,1,3);
 				printf("\n\n\nLISTA SEGUN ORDEN ELEGIDO\n");
-				controller_ListPassenger(Aux);
 				SeOrdeno = 1;
 		    break;
 			case 6:
-				printf("Cargando...\tEsto puede demorarce unos segundos...\n");
 				OrdenarPorParametros(Aux,1,4);
 				printf("\n\n\nLISTA SEGUN ORDEN ELEGIDO\n");
-				controller_ListPassenger(Aux);
 				SeOrdeno = 1;
 			break;
 			case 7:
@@ -356,6 +348,10 @@ int controller_sortPassenger(LinkedList* pArrayListPassenger)
 
 				}
 			break;
+			}
+			if(SeOrdeno == 1 && option != 7 && option != 0)
+			{
+				controller_ListPassenger(Aux);
 			}
 
 		}while(option != 7);
@@ -450,5 +446,37 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListPassenger)
 		fclose(pArchivo);
 	}
     return retorno;
+}
+
+int BuscarIdPasajero(LinkedList* pArrayListPassenger,Passenger* pasajeroAux)
+{
+	int index = -1;
+	int len;
+	int IdAux;
+	len = ll_len(pArrayListPassenger);
+	printf("\nPASAJEROS\n");
+	controller_ListPassenger(pArrayListPassenger);
+	IdAux = getInt("Seleccione el id del pasajero: \n",1,100000);
+	index = obtenerIndicePasajero(pArrayListPassenger,pasajeroAux,len,IdAux);
+	while(index == -1)
+	{
+		IdAux = getInt("Seleccione el id del pasajero: \n",1,100000);
+		index = obtenerIndicePasajero(pArrayListPassenger,pasajeroAux,len,IdAux);
+	}
+	return index;
+}
+int obtenerIndicePasajero(LinkedList* pArrayListPassenger,Passenger* pasajeroAux,int len, int idAux)
+{
+	int index;
+	for(int i = 0;i<len;i++)
+		{
+			pasajeroAux = ll_get(pArrayListPassenger,i);
+			if(idAux == pasajeroAux->id )
+			{
+				index = i;
+				break;
+			}
+		}
+	return index;
 }
 

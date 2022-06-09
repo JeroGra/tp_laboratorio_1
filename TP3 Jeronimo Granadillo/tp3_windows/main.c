@@ -278,7 +278,7 @@ int main()
 					  }
 					  else
 					  {
-						  option = 0;
+						  option = 10;
 						  break;
 					  }
 					}

@@ -147,6 +147,18 @@ void getString(char mensajeCargado[], char mensaje[], int maximo)
 		gets(mensajeCargado);
 	}
 }
+void getName(char* mensajeCargado, char* mensaje, int maximo)
+{
+	printf("%s",mensaje);
+	fflush(stdin);
+	gets(mensajeCargado);
+	while(ValidacionString(mensajeCargado,maximo)==0 || esUnNombre(mensajeCargado)==-1)
+	{
+		printf("Error: \n");
+		fflush(stdin);
+		gets(mensajeCargado);
+	}
+}
 
 void TrasnsformarNombres(char modificar[])
 {
@@ -286,12 +298,35 @@ int EsNumerica(char* num)
 		else
 		{
 			isOk = -1;
+			break;
 		}
-		isOk = isOk + 0;
 	}
-	if(isOk != 0)
-	{
-		isOk = -1;
-	}
+	return isOk;
+}
+
+int esUnNombre(char* nombre)
+{
+	int isOk = -1;
+	int size;
+	size = strlen(nombre);
+	for(int i = 0;i<size;i++)
+		{
+			if(*(nombre+0) != 32)
+			{
+				if((*(nombre+i) > 64 && *(nombre+i) < 91) || (*(nombre+i) > 96 && *(nombre+i) < 123))
+				{
+				  isOk = 0;
+				}
+				else
+				{
+					isOk = -1;
+					break;
+				}
+			}
+			else
+			{
+			  break;
+			}
+		}
 	return isOk;
 }
