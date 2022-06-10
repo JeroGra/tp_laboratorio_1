@@ -220,8 +220,7 @@ int AddPassenger(int id, char*nombre, char*apellido, char*tipoPasajero, char*cod
 		Passenger_setCodigoVuelo(pasajero,codigoVuelo);
 		Passenger_setTipoPasajero(pasajero,tipoPasajero);
 		Passenger_setEstado(pasajero,estadoPasajero);
-		printf("|ID  \t|Nombre              \t|Apellido            \t|Precio       \t|Codigo de Vuelo    \t|Tipo de Pasajero   \t|Estado de Pasajero       \n"
-				   "|_______|_______________________|_______________________|_______________|_______________________|_______________________|________________________|\n");
+		CabeceraPrintLista();
 		Passenger_print(pasajero);
 
 		printf("inicialice los campos\n");
@@ -530,4 +529,12 @@ int ComparaId(void* PasajeroI, void* PasajeroJ)
 	return respuesta;
 }
 
-
+void CabeceraPrintLista()
+{
+	printf("|ID  \t|Nombre              \t|Apellido            \t|Precio       \t|Codigo de Vuelo    \t|Tipo de Pasajero   \t|Estado de Pasajero       \n"
+					   "|_______|_______________________|_______________________|_______________|_______________________|_______________________|________________________|\n");
+}
+void PiePrintLista()
+{
+	printf("|_______|_______________________|_______________________|_______________|_______________________|_______________________|________________________|\n");
+}

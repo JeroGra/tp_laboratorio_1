@@ -180,10 +180,8 @@ int Passenger_getPrecio(Passenger* this,float* precio);
 /// @return isOk = 0 si la operacion salio mal, isOk = 1 si salio bien
 int GetterPassenger(Passenger* pasajero, int*id, char*nombre, char*apellido, char*tipoPasajero, char*codigoVuelo, char*estadoPasajero, float* precio);
 
-
-
-
-
-
+//Funciones Print lista//
+void CabeceraPrintLista();
+void PiePrintLista();
 
 #endif /* PASSENGER_H_ */

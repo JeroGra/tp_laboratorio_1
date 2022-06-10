@@ -122,8 +122,7 @@ int controller_editPassenger(LinkedList* pArrayListPassenger,pEstado* estado,int
 	{
 		indicePAsajero = BuscarIdPasajero(pArrayListPassenger,pasajero);
 		pasajero = ll_get(pArrayListPassenger,indicePAsajero);
-		printf("|ID  \t|Nombre              \t|Apellido            \t|Precio       \t|Codigo de Vuelo    \t|Tipo de Pasajero   \t|Estado de Pasajero       \n"
-				   "|_______|_______________________|_______________________|_______________|_______________________|_______________________|________________________|\n");
+		CabeceraPrintLista();
 		printf("Este es el pasajero seleccionado para Modificar?\n");
 		Passenger_print(pasajero);
 	   if(getInt("1.Si\n"
@@ -225,8 +224,7 @@ int controller_removePassenger(LinkedList* pArrayListPassenger)
 
     indicePasajero= BuscarIdPasajero(pArrayListPassenger,pasajero);
 	pasajero = ll_get(pArrayListPassenger,indicePasajero);
-	printf("|ID  \t|Nombre              \t|Apellido            \t|Precio       \t|Codigo de Vuelo    \t|Tipo de Pasajero   \t|Estado de Pasajero       \n"
-			   "|_______|_______________________|_______________________|_______________|_______________________|_______________________|________________________|\n");
+	CabeceraPrintLista();
 	printf("Este es el pasajero seleccionado para eliminar?\n");
 	Passenger_print(pasajero);
 	if(getInt("1.Si\n"
@@ -253,14 +251,13 @@ int controller_removePassenger(LinkedList* pArrayListPassenger)
 int controller_ListPassenger(LinkedList* pArrayListPassenger)
 {
 	Passenger* pasajero;
-	printf("|ID  \t|Nombre              \t|Apellido            \t|Precio       \t|Codigo de Vuelo    \t|Tipo de Pasajero   \t|Estado de Pasajero       \n"
-		   "|_______|_______________________|_______________________|_______________|_______________________|_______________________|________________________|\n");
+	CabeceraPrintLista()	  ;
 	for(int i = 0; i<ll_len(pArrayListPassenger); i++)
 	{
 		pasajero = (Passenger*) ll_get(pArrayListPassenger, i);
 		Passenger_print(pasajero);
 	}
-	printf("|_______|_______________________|_______________________|_______________|_______________________|_______________________|________________________|\n");
+	PiePrintLista();
     return 1;
 }
 
@@ -447,7 +444,13 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListPassenger)
 	}
     return retorno;
 }
-
+/// @fn int BuscarIdPasajero(LinkedList*, Passenger*)
+/// @brief Despliega la lista de psajeros para elegir un pasajero colocando su Id  luego segun el elegido confirma su exitencia y devuleve el indice
+/// del pasajero cual se eligio por su id
+///
+/// @param pArrayListPassenger
+/// @param pasajeroAux
+/// @return
 int BuscarIdPasajero(LinkedList* pArrayListPassenger,Passenger* pasajeroAux)
 {
 	int index = -1;
@@ -465,6 +468,14 @@ int BuscarIdPasajero(LinkedList* pArrayListPassenger,Passenger* pasajeroAux)
 	}
 	return index;
 }
+/// @fn int obtenerIndicePasajero(LinkedList*, Passenger*, int, int)
+/// @brief Machea el id seleccionado con los id de la lista de pasajero para encontrar al pasajero correspondiente y devolver su indice
+///
+/// @param pArrayListPassenger
+/// @param pasajeroAux
+/// @param len
+/// @param idAux
+/// @return
 int obtenerIndicePasajero(LinkedList* pArrayListPassenger,Passenger* pasajeroAux,int len, int idAux)
 {
 	int index;
